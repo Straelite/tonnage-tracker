@@ -5,7 +5,26 @@
     <body>
         <h1>Stats for Meatheads</h1>
         <p>Graphs will be here</p>
-        <button data-js-save-lift>Save!</button>
+        <form data-js-save-lift>
+            <input type="number" name="weight" required/>
+            <input type="number" name="reps" required/>
+            <select name="liftName" required>
+                <option value="bench_press">Bench Press</option>
+                <option value="deadlift">Deadlift</option>
+                <option value="overhead_press">Overhead Press</option>
+                <option value="squat">Squat</option>
+            </select>
+            <input name="date" type="date"  required/>
+            <button>Save!</button>
+        </form>
+        <button data-js-get-lifts>Get!</button>
+        <select name="liftName" data-js-liftname>
+            <option value="bench_press">Bench Press</option>
+            <option value="deadlift">Deadlift</option>
+            <option value="overhead_press">Overhead Press</option>
+            <option value="squat">Squat</option>
+        </select>
+        <div data-js-output></div>
         <script type="text/javascript" src="./bundle.js"></script>
     </body>
 </html>

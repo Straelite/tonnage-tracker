@@ -21,7 +21,7 @@ const liftSchema = new Schema({
     updated: {
         type: Date,
         default: Date.now()
-    }
+    },
 });
 
 module.exports = mongoose.model('lift', liftSchema);

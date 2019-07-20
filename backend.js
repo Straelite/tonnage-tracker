@@ -1,44 +1,49 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const Lift = require('./models/Lift');
 
+//configure Express
 const app = express();
 const port = 3000;
 
+//configure mongo
 const dbUrl = 'mongodb://localhost:27017';
 const dbName = 'tonnageTrackerDev';
 mongoose.connect(`${dbUrl}/${dbName}`);
 const db = mongoose.connection;
-const Lift = require('./models/Lift');
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname + '/dist/index.html'));
+    res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
 //TODO - this probably isn't how you serve assets
 app.get('/bundle.js', (req, res) => {
-    res.sendFile(path.join(__dirname + '/dist/bundle.js'));
+    res.sendFile(path.join(__dirname + '/public/bundle.js'));
 });
 
 
 app.post('/lift-data/write', (req, res) => {
     const body = req.body;
-    const name = body.name;
-    if (!name) {
-        return 'nope';
-    }
-    let newLift = new Lift(body);
-    newLift.save((err) => {
-        if (err) {
-            throw new Error(err);
-        }; // saved!
+    let savedLifts = [];
+    body.forEach(element => {
+        const name = element.name;
+        if (!name) {
+            return 'nope';
+        }
+        let newLift = new Lift(element);
+        newLift.save((err) => {
+            if (err) {
+                throw new Error(err);
+            }; // saved!
+        });
+        savedLifts.push(newLift);
     });
-
-    res.json(newLift);
+    res.json(savedLifts);
 });
 
 app.get('/lift-data/get/:name', (req, res) => {
@@ -49,9 +54,35 @@ app.get('/lift-data/get/:name', (req, res) => {
         if (err) {
             throw new Error(err);
         }
+        res.json({ data: results });
+    });
+});
+
+app.delete('/lift-data/delete/:id', (req,res) => {
+    if (!req.params || !req.params.id) {
+        throw new Error('No lift id specified');
+    }
+    Lift.deleteOne({_id: req.params.id}, (err, results) => {
+        if (err) {
+            throw new Error(err);
+        }
         res.json({data: results});
     });
-}); 
+
+});
+
+app.delete('/lift-data/delete/date/:date', (req, res) => {
+    if (!req.params || !req.params.date) {
+        throw new Error('No date specified');
+    }
+
+    Lift.deleteMany({date: req.params.date}, (err, results) => {
+        if (err) {
+            throw new Error(err);
+        }
+        res.json({data: results});
+    })
+});
 
 app.listen(port);
 

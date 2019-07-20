@@ -1,14 +1,15 @@
 // Imports: Dependencies
 const path = require('path');
 require("babel-register");
+const webpack = require('webpack'); 
 // Webpack Configuration
 const config = {
-  
+  mode: 'development',
   // Entry
   entry: './src/app.js',
   // Output
   output: {
-    path: path.resolve(__dirname, 'dist/'),
+    path: path.resolve(__dirname, 'public/'),
     filename: 'bundle.js',
   },
   // Loaders
@@ -16,7 +17,7 @@ const config = {
     rules : [
       // JavaScript/JSX Files
       {
-        test: /\.jsx$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: ['babel-loader'],
       },
@@ -27,10 +28,15 @@ const config = {
       }
     ]
   },
+  resolve: {
+    extensions: ['*', '.js', '.jsx']
+  },
   // Plugins
-  plugins: [],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],  
   watch: true,
-  devtool: 'source-map',
+  devtool: 'source-map'
 };
 // Exports
 module.exports = config;

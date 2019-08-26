@@ -5,7 +5,8 @@ const Lift = require('./models/Lift');
 
 //configure Express
 const app = express();
-const port = 3000;
+const port = 8080
+const cors = require('cors')
 
 //configure mongo
 const dbUrl = 'mongodb://localhost:27017';
@@ -17,15 +18,14 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(express.json());
 
+//Add dev-only modules
+if (app.settings.env === 'development') {
+    app.use(cors());
+}
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-
-//TODO - this probably isn't how you serve assets
-app.get('/bundle.js', (req, res) => {
-    res.sendFile(path.join(__dirname + '/public/bundle.js'));
-});
-
 
 app.post('/lift-data/write', (req, res) => {
     const body = req.body;

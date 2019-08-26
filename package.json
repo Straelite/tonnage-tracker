@@ -5,10 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack.config.js",
-    "serve": "nodemon ./backend.js",
-    "dev-server": "npm-run-all --parallel build serve",
-    "prettier": "prettier"
+    "build": "webpack --config webpack.config.js --mode production",
+    "dev-frontend": "webpack-dev-server --hot",
+    "serve": "nodemon ./backend.js lvh.me 8080",
+    "dev-server": "npm-run-all --parallel dev-frontend serve",
+    "prettier": "prettier --find-config-path --write ./*/**",
+    "precise-commits": "precise-commits",
+    "precommit": "npm run precise-commits"
   },
   "keywords": [],
   "author": "",
@@ -23,7 +26,10 @@
     "@babel/register": "^7.4.4",
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "cors": "^2.8.5",
+    "html-webpack-plugin": "^3.2.0",
     "husky": "^3.0.1",
+    "mini-css-extract-plugin": "^0.8.0",
     "node-hot-loader": "^1.14.0",
     "nodemon": "^1.19.1",
     "npm-run-all": "^4.1.5",
@@ -31,19 +37,24 @@
     "prettier": "^1.18.2",
     "webpack": "^4.34.0",
     "webpack-cli": "^3.3.4",
+    "webpack-dev-middleware": "^3.7.0",
     "webpack-dev-server": "^3.7.1"
   },
   "dependencies": {
     "axios": "^0.19.0",
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
+    "chart.js": "^2.8.0",
     "chartjs": "^0.3.24",
-    "css-loader": "^2.1.1",
+    "css-loader": "^3.1.0",
     "moment": "^2.24.0",
     "mongodb": "^3.2.7",
     "mongoose": "^5.6.0",
+    "node-sass": "^4.12.0",
     "react": "^16.8.6",
+    "react-chartjs-2": "^2.7.6",
     "react-dom": "^16.8.6",
+    "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1"
   }
 }

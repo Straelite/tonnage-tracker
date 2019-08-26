@@ -1,0 +1,14 @@
+@import './typography';
+
+.weight-table {
+    display: grid;
+
+    &__header,
+    &__rows {
+        display: flex;
+
+        div {
+            flex: 1;
+        }
+    }
+}

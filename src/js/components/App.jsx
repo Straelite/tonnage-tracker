@@ -7,12 +7,6 @@ Axios.defaults.baseURL = 'http://lvh.me:8080'
 
 const lifts = ['bench_press', 'squat', 'overhead_press', 'deadlift']
 
-const testDeletion = () => {
-    Axios.delete('/lift-data/delete/5d04d1c6580d7a26f2fb49b3').then(resp => {
-        console.log(resp)
-    })
-}
-
 const App = () => {
     return (
         <>

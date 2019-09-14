@@ -77,18 +77,18 @@ class LiftForm extends Component {
                     )
                 })}
 
-{liftsToAdd && liftsToAdd.length ? 
+                {liftsToAdd && liftsToAdd.length ?
 
-                <div className="submissionForm__group">
+                    <div className="submissionForm__group">
 
-                    <div className="submissionForm__wrap">
-                        <button className="btn btn__primary" onClick={this.handleSaveLiftClick}>
-                            Save!</button>
+                        <div className="submissionForm__wrap">
+                            <button className="btn btn__primary" onClick={this.handleSaveLiftClick}>
+                                Save!</button>
+                        </div>
+
                     </div>
-
-                </div>
-                : ''
-}
+                    : ''
+                }
             </>
         )
     }

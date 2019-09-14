@@ -28,7 +28,13 @@ const LiftSelect = props => {
         <div className="submissionForm">
             <div className="submissionForm__group">
                 <div className="submissionForm__wrap">
-                    <select name="liftName" required onChange={handleLiftSelected} className={classes ? classes : ''} className="submissionForm__input submissionForm__input--select">
+                    <select
+                        name="liftName"
+                        required
+                        onChange={handleLiftSelected}
+                        className={classes ? classes : ''}
+                        className="submissionForm__input submissionForm__input--select"
+                    >
                         {options}
                     </select>
                 </div>

@@ -10,8 +10,7 @@
     "serve": "nodemon ./backend.js lvh.me 8080",
     "dev-server": "npm-run-all --parallel dev-frontend serve",
     "prettier": "prettier --find-config-path --write ./*/**",
-    "precise-commits": "precise-commits",
-    "precommit": "npm run precise-commits"
+    "precise-commits": "precise-commits"
   },
   "keywords": [],
   "author": "",

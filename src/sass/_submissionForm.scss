@@ -9,11 +9,9 @@
         margin-right: $blockPadding * 1.5;
 
         &:last-child {
-            margin-right: 0
+            margin-right: 0;
         }
-
     }
-
 
     &__group {
         display: flex;
@@ -25,14 +23,13 @@
         padding: $blockPadding;
         border: 0;
         border-bottom: 2px transparent solid;
-        
+
         &:focus {
-            border-bottom-color: $colourPrimary 
+            border-bottom-color: $colourPrimary;
         }
 
         &--select {
             text-transform: capitalize;
         }
-
     }
 }

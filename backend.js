@@ -50,23 +50,28 @@ app.get('/lift-data/get/:name', (req, res) => {
     if (!req.params || !req.param.name) {
         throw new Error('No lift specified');
     }
-    Lift.find({ 'name': req.params.name }, (err, results) => {
+    Lift.find({ 'name': req.params.name }
+    ).sort({
+        date: 'asc'
+    }).exec((err, results) => {
+        if (err) {
+            throw new Error(err);
+        }
+
+        res.json({ data: results })
+
+    });
+});
+
+app.delete('/lift-data/delete/:id', (req, res) => {
+    if (!req.params || !req.params.id) {
+        throw new Error('No lift id specified');
+    }
+    Lift.deleteOne({ _id: req.params.id }, (err, results) => {
         if (err) {
             throw new Error(err);
         }
         res.json({ data: results });
-    });
-});
-
-app.delete('/lift-data/delete/:id', (req,res) => {
-    if (!req.params || !req.params.id) {
-        throw new Error('No lift id specified');
-    }
-    Lift.deleteOne({_id: req.params.id}, (err, results) => {
-        if (err) {
-            throw new Error(err);
-        }
-        res.json({data: results});
     });
 
 });
@@ -76,11 +81,11 @@ app.delete('/lift-data/delete/date/:date', (req, res) => {
         throw new Error('No date specified');
     }
 
-    Lift.deleteMany({date: req.params.date}, (err, results) => {
+    Lift.deleteMany({ date: req.params.date }, (err, results) => {
         if (err) {
             throw new Error(err);
         }
-        res.json({data: results});
+        res.json({ data: results });
     })
 });
 

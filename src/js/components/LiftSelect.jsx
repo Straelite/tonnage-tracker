@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 const LiftSelect = props => {
-    const { lifts, getSelectedLift } = props
+    const { lifts, getSelectedLift, classes } = props
     const [selectedLift, setSelectedLift] = useState(lifts[0])
 
     const handleLiftSelected = e => {
@@ -25,9 +25,15 @@ const LiftSelect = props => {
     ))
 
     return (
-        <select name="liftName" required onChange={handleLiftSelected}>
-            {options}
-        </select>
+        <div className="submissionForm">
+            <div className="submissionForm__group">
+                <div className="submissionForm__wrap">
+                    <select name="liftName" required onChange={handleLiftSelected} className={classes ? classes : ''} className="submissionForm__input submissionForm__input--select">
+                        {options}
+                    </select>
+                </div>
+            </div>
+        </div>
     )
 }
 

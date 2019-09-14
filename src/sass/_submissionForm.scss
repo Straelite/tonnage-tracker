@@ -1,0 +1,38 @@
+.submissionForm {
+    display: flex;
+    flex-direction: column;
+
+    &__wrap {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 50%;
+        margin-right: $blockPadding * 1.5;
+
+        &:last-child {
+            margin-right: 0
+        }
+
+    }
+
+
+    &__group {
+        display: flex;
+        margin-bottom: $blockPadding * 2;
+    }
+
+    &__input {
+        box-sizing: border-box;
+        padding: $blockPadding;
+        border: 0;
+        border-bottom: 2px transparent solid;
+        
+        &:focus {
+            border-bottom-color: $colourPrimary 
+        }
+
+        &--select {
+            text-transform: capitalize;
+        }
+
+    }
+}

@@ -16,6 +16,56 @@ class LiftForm extends Component {
         const { liftsToAdd } = this.state
         return (
             <>
+
+                <form className="submissionForm" data-js-save-lift onSubmit={this.handleAddLiftClick}>
+                    <div className="submissionForm__group">
+                        <div className="submissionForm__wrap">
+
+                            <label className="submissionFrom__label">Which lift?</label>
+                            <LiftSelect lifts={lifts} classes="submissionForm__input submissionForm__input--select" />
+                        </div>
+                        <div className="submissionForm__wrap">
+
+                            <label className="submissionFrom__label">When did you do it?</label>
+                            <input className="submissionForm__input"
+                                placeholder="Date"
+                                name="date"
+                                type="date"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div className="submissionForm__group">
+                        <div className="submissionForm__wrap">
+                            <label className="submissionFrom__label">How much did you lift?</label>
+                            <input className="submissionForm__input"
+                                placeholder="Weight"
+                                type="number"
+                                name="weight"
+                                required
+                            />
+                        </div>
+                        <div className="submissionForm__wrap">
+
+                            <label className="submissionFrom__label">How many reps?</label>
+                            <input className="submissionForm__input"
+                                placeholder="Reps"
+                                type="number"
+                                name="reps"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div className="submissionForm__group">
+                        <div className="submissionForm__wrap">
+                            <button className="btn btn__primary">Add</button>
+                        </div>
+                    </div>
+
+                </form>
+
                 {liftsToAdd.map((lift, key) => {
                     return (
                         <div key={key}>
@@ -26,30 +76,19 @@ class LiftForm extends Component {
                         </div>
                     )
                 })}
-                <form data-js-save-lift onSubmit={this.handleAddLiftClick}>
-                    <input
-                        placeholder="Weight"
-                        type="number"
-                        name="weight"
-                        required
-                    />
-                    <input
-                        placeholder="Reps"
-                        type="number"
-                        name="reps"
-                        required
-                    />
-                    <LiftSelect lifts={lifts} />
-                    <input
-                        placeholder="Date"
-                        name="date"
-                        type="date"
-                        required
-                    />
-                    <button>Add</button>
-                </form>
 
-                <button onClick={this.handleSaveLiftClick}>Save!</button>
+{liftsToAdd && liftsToAdd.length ? 
+
+                <div className="submissionForm__group">
+
+                    <div className="submissionForm__wrap">
+                        <button className="btn btn__primary" onClick={this.handleSaveLiftClick}>
+                            Save!</button>
+                    </div>
+
+                </div>
+                : ''
+}
             </>
         )
     }
